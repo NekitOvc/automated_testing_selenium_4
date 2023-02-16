@@ -312,48 +312,6 @@ def test_japanese_menu_2(testing):
     assert selenium.find_element(By.CLASS_NAME, 'search-results__item-name').text == 'Классический сет'
 
 
-# TEST !!!ДОДЕЛАТЬ
-# проверка возможности доставки в Колпино и Всеволожск
-def test_italian_menu(testing):
-    selenium = testing
-    # ожидание элемента на странице
-    try:
-        WebDriverWait(selenium, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, 'footer-nav__list')))
-        print('Элемент отобразился')
-    except:
-        print('Элемент не отобразился')
-
-    # нажать на "Да" в окне выбора города
-    selenium.find_element(By.XPATH, '/html/body/div[1]/div[4]/aside/nav/div/div/div[1]/div[1]/div/div[2]/button[1]').click()
-
-    # нажать на "Понятно" на баннере внизу сайта
-    selenium.find_element(By.CLASS_NAME, 'info-button').click()
-    # нажать на раздел "Итальянское меню"
-    selenium.find_element(By.XPATH, '/html/body/div[1]/div[4]/div/main/div[3]/footer/div/div[1]/div[1]/ul/li[2]').click()
-    # нажать на "Показать полностью"
-    selenium.find_element(By.XPATH, '/html/body/div[1]/div[4]/div/main/div[2]/div[6]/div/div[2]/button').click()
-    time.sleep(2)
-
-    # перенос курсора на текст, в котором указана информация о наличии классического сета
-    ActionChains(selenium).move_to_element(selenium.find_element(By.XPATH, '/html/body/div[1]/div[4]/div/main/div[2]/div[6]/div/div[1]/p[4]')).perform()
-    time.sleep(2)
-
-    # нажать на раздел "Доставка"
-    selenium.find_element(By.XPATH, '/html/body/div[1]/div[4]/div/main/div[2]/footer/div/div[1]/div[2]/ul/li[2]/a').click()
-    time.sleep(1)
-
-    # нажать на "Открыть в Яндекс Картах"
-    selenium.get('https://yandex.ru/maps/2/saint-petersburg/?from=mapframe&ll=30.268003%2C59.905240&mode=usermaps&source=mapframe&um=constructor%3Adce38da04d4907a35832c0ddd0aac178a3a7d31cc26099497c51a2adf50fcbae&utm_source=mapframe&z=9')
-    # в поле поиска ввести "Всеволожск"
-    selenium.find_element(By.CLASS_NAME, 'search-form-view__input').send_keys('Всеволожск')
-    # нажать Enter
-    selenium.find_element(By.CLASS_NAME, 'search-form-view__input').send_keys(Keys.ENTER)
-
-    selenium.save_screenshot('test_italian_menu.png')
-
-    assert selenium.find_element(By.CLASS_NAME, 'card-title-view__title').text == 'Всеволожск'
-
-
 # TEST_010
 # проверка наличия в меню соуса барбекью
 def test_sauces(testing):
